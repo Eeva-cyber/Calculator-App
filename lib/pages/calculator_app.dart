@@ -55,7 +55,7 @@ class _CalculatorAppState extends State<CalculatorApp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 0, 20, 65),
+      backgroundColor: const Color.fromARGB(255, 51, 81, 99),
       /*
       appBar: AppBar(
         title: Text(
@@ -78,7 +78,7 @@ class _CalculatorAppState extends State<CalculatorApp> {
               width: double.infinity,
               padding: const EdgeInsets.symmetric(horizontal: 25.0),
               alignment: Alignment.bottomRight,
-              color: const Color.fromARGB(255, 0, 20, 65),
+              color: const Color.fromARGB(255, 51, 81, 99),
               child: Text(
                 '$_firstAnswer',
                 style: TextStyle(
@@ -100,8 +100,8 @@ class _CalculatorAppState extends State<CalculatorApp> {
             physics: NeverScrollableScrollPhysics(),
             itemBuilder: (context, index) => Container(
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10.0),
-                color: const Color.fromARGB(255, 1, 55, 181),
+                borderRadius: BorderRadius.circular(8.0),
+                color: const Color.fromARGB(255, 90, 143, 150),
               ),
               margin: EdgeInsets.all(5.0),
               child: Center(
