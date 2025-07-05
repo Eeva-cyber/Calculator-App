@@ -51,7 +51,15 @@ class _CalculatorAppState extends State<CalculatorApp> {
     });
   }
 
-  //UI
+  final List<String> buttons = [
+  'AC', '', '', 'DEL', 
+  '7', '8', '9', '/',
+  '4', '5', '6', 'x',
+  '1', '2', '3', '-',
+  '0', '.', '=', '+',
+  ];
+
+  //UIs
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -72,8 +80,8 @@ class _CalculatorAppState extends State<CalculatorApp> {
       */
       body: Column(
         children: [
-          //display area
-          Expanded(
+          // display area
+          Flexible(
             child: Container(
               width: double.infinity,
               padding: const EdgeInsets.symmetric(horizontal: 25.0),
@@ -89,28 +97,30 @@ class _CalculatorAppState extends State<CalculatorApp> {
               ),
             ),
           ),
-
-          //buttons area
-          GridView.builder(
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 4
-            ), 
-            itemCount: 20,
-            shrinkWrap: true,
-            physics: NeverScrollableScrollPhysics(),
-            itemBuilder: (context, index) => Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(8.0),
-                color: const Color.fromARGB(255, 90, 143, 150),
+          // All buttons in a single grid
+          SizedBox(
+            height: 550, // Adjust height as needed for your layout
+            child: GridView.builder(
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 4,
+                childAspectRatio: 1, // Makes all buttons square
               ),
-              margin: EdgeInsets.all(5.0),
-              child: Center(
-                child: Text(
-                  '$index',
-                  style: TextStyle(
-                    fontSize: 30,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
+              itemCount: buttons.length,
+              physics: NeverScrollableScrollPhysics(),
+              itemBuilder: (context, index) => Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(8.0),
+                  color: const Color.fromARGB(255, 90, 143, 150),
+                ),
+                margin: EdgeInsets.all(5.0),
+                child: Center(
+                  child: Text(
+                    buttons[index],
+                    style: TextStyle(
+                      fontSize: 30,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
                   ),
                 ),
               ),
