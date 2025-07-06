@@ -107,23 +107,33 @@ class _CalculatorAppState extends State<CalculatorApp> {
               ),
               itemCount: buttons.length,
               physics: NeverScrollableScrollPhysics(),
-              itemBuilder: (context, index) => Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8.0),
-                  color: const Color.fromARGB(255, 90, 143, 150),
-                ),
-                margin: EdgeInsets.all(5.0),
-                child: Center(
-                  child: Text(
-                    buttons[index],
-                    style: TextStyle(
-                      fontSize: 30,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
+              itemBuilder: (context, index) {
+                String label = buttons[index];
+                
+                return GestureDetector(
+                  onTap: () {
+                    print('Tapped $label');
+                    //can change the logic her, placeholder first
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(8.0),
+                      color: const Color.fromARGB(255, 90, 143, 150),
+                    ),
+                    margin: EdgeInsets.all(5.0),
+                    child: Center(
+                      child: Text(
+                        buttons[index],
+                        style: TextStyle(
+                          fontSize: 30,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
+                      ),
                     ),
                   ),
-                ),
-              ),
+                );
+              },
             ),
           ),
         ],
