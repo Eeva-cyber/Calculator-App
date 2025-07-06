@@ -10,44 +10,26 @@ class CalculatorApp extends StatefulWidget {
 class _CalculatorAppState extends State<CalculatorApp> {
 
   //variable
-  int _firstNumber = 0;
-  int _secondNumber = 0;
-  int _firstAnswer = 0;
+  String _userInput = '';
+  String _result = '';
 
   //methods
-  void _addition() {
+  void _handleButtonPress(String value) {
     setState(() {
-      _firstAnswer = _firstNumber + _secondNumber;
-    });
-  }
-
-  void _subtraction() {
-    setState(() {
-      _firstAnswer = _firstNumber - _secondNumber;
-    });
-  }
-
-  void _multiplication() {
-    setState(() {
-      _firstAnswer = _firstNumber * _secondNumber;
-    });
-  }
-
-  void _division() {
-    setState(() {
-      if (_secondNumber != 0) {
-        _firstAnswer = _firstNumber ~/ _secondNumber; // Integer division
+      if (value == 'AC') {
+        _userInput = '';
+        _result = '';
+      } else if (value == 'DEL') {
+        if (_userInput.isNotEmpty) {
+          _userInput = _userInput.substring(0, _userInput.length - 1);
+        }
+      } else if (value == '=') {
+        // Here you would typically evaluate the expression
+        // For simplicity, we just show the input as result
+        _result = _userInput; // Replace with actual evaluation logic
       } else {
-        _firstAnswer = 0; // Handle division by zero
+        _userInput += value;
       }
-    });
-  }
-
-  void _clear() {
-    setState(() {
-      _firstNumber = 0;
-      _secondNumber = 0;
-      _firstAnswer = 0;
     });
   }
 
@@ -87,13 +69,28 @@ class _CalculatorAppState extends State<CalculatorApp> {
               padding: const EdgeInsets.symmetric(horizontal: 25.0),
               alignment: Alignment.bottomRight,
               color: const Color.fromARGB(255, 51, 81, 99),
-              child: Text(
-                '$_firstAnswer',
-                style: TextStyle(
-                  fontSize: 75,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
-                ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Text(
+                    _userInput,
+                    style: TextStyle(
+                      fontSize: 30,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
+                  ),
+                  SizedBox(height: 10),
+                  Text(
+                    _result,
+                    style: TextStyle(
+                      fontSize: 40,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
+                  ),
+                ],
               ),
             ),
           ),
@@ -112,8 +109,7 @@ class _CalculatorAppState extends State<CalculatorApp> {
                 
                 return GestureDetector(
                   onTap: () {
-                    print('Tapped $label');
-                    //can change the logic her, placeholder first
+                    _handleButtonPress(label);
                   },
                   child: Container(
                     decoration: BoxDecoration(
