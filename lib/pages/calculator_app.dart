@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:math_expressions/math_expressions.dart';
 
 class CalculatorApp extends StatefulWidget {
   const CalculatorApp({super.key});
@@ -24,17 +25,37 @@ class _CalculatorAppState extends State<CalculatorApp> {
           _userInput = _userInput.substring(0, _userInput.length - 1);
         }
       } else if (value == '=') {
-        // Here you would typically evaluate the expression
-        // For simplicity, we just show the input as result
-        _result = _userInput; // Replace with actual evaluation logic
+        _evaluate(); 
       } else {
         _userInput += value;
       }
     });
   }
 
+  void _evaluate() {
+  String expression = _userInput.replaceAll('x', '*');
+  if (expression.isEmpty) {
+    _result = '';
+    return;
+  } 
+
+    try {
+      GrammarParser p = GrammarParser(); // Creates a math parser
+      Expression exp = p.parse(expression); // Parses the input into a math expression tree
+      ContextModel cm = ContextModel(); // Required even if we don’t use variables
+      double eval = exp.evaluate(EvaluationType.REAL, cm); // Calculates the result
+      if (eval == eval.toInt()) {
+        _result = eval.toInt().toString();
+      } else {
+        _result = eval.toString();
+      }
+    } catch (e) {
+      _result = 'Error'; // If parsing or calculation fails
+    }
+  }
+
   final List<String> buttons = [
-  'AC', '', '', 'DEL', 
+  'AC', '(', ')', 'DEL', 
   '7', '8', '9', '/',
   '4', '5', '6', 'x',
   '1', '2', '3', '-',
