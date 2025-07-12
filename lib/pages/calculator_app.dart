@@ -62,6 +62,16 @@ class _CalculatorAppState extends State<CalculatorApp> {
   '0', '.', '=', '+',
   ];
 
+  Color _getButtonColor(int index) {
+    if (index == 0) {
+      return const Color.fromARGB(255, 239, 124, 30);
+    } else if (index < 4 || index % 4 == 3) {
+      return const Color.fromARGB(255, 33, 171, 168);
+    } else {
+      return const Color.fromARGB(255, 59, 141, 154); // default
+    }
+  }
+
   //UIs
   @override
   Widget build(BuildContext context) {
@@ -135,7 +145,7 @@ class _CalculatorAppState extends State<CalculatorApp> {
                   child: Container(
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(8.0),
-                      color: const Color.fromARGB(255, 90, 143, 150),
+                      color: _getButtonColor(index)
                     ),
                     margin: EdgeInsets.all(5.0),
                     child: Center(
